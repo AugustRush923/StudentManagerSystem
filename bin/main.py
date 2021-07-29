@@ -1,4 +1,4 @@
-from managerSystem import StudentManager
+from core.managerSystem import StudentManager
 
 
 if __name__ == '__main__':

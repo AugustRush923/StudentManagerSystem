@@ -1,4 +1,4 @@
-from student import Student
+from lib.utils import StudentJSONDecoder, StudentJSONEncoder, Student, json
 
 
 class StudentManager:
@@ -60,32 +60,20 @@ class StudentManager:
             print(f'{student.name}\t{student.gender}\t{student.tel}')
 
     def save_student_info(self):
-        with open('student.txt', 'w+', encoding='utf-8') as f:
-            # for student in self.student_list:
-            #     f.write(student.name + ',' + student.gender + ',' + student.tel + '\n')
-
-            new_list = [student.__dict__ for student in self.student_list]
-            f.write(str(new_list))
+        with open('db/data.json', 'w', encoding='utf-8') as f:
+            json.dump(self.student_list, f, ensure_ascii=False, cls=StudentJSONEncoder, indent=4)
         print('保存成功')
         print('*' * 30)
 
     def load_student(self):
         try:
-            f = open('student.txt', 'r+', encoding='utf-8')
+            with open('db/data.json', 'r', encoding='utf-8') as f:
+                self.student_list = json.load(f, cls=StudentJSONDecoder)
+        except json.decoder.JSONDecodeError:
+            self.student_list = []
         except FileNotFoundError:
-            pass
-        else:
-            # lines = f.readlines()
-            # for line in lines:
-            #     line = line.strip()
-            #     line = line.split(',')
-            #     student = Student(line[0], line[1], line[2])
-            #     self.student_list.append(student)
-            # print('载入成功')
-            data = f.read()
-            new_list = eval(data)
-            self.student_list = [Student(student['name'], student['gender'], student['tel']) for student in new_list]
-            f.close()
+            with open('data.json', 'w', encoding='utf-8') as f:
+                self.student_list = []
 
     @staticmethod
     def show_menu():

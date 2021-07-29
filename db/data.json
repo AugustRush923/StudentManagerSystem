@@ -1,0 +1,17 @@
+[
+    {
+        "name": "高琪",
+        "gender": "female",
+        "tel": 123
+    },
+    {
+        "name": "august",
+        "gender": "male",
+        "tel": 456
+    },
+    {
+        "name": "Tom",
+        "gender": "male",
+        "tel": "789"
+    }
+]
