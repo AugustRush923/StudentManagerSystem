@@ -72,7 +72,7 @@ class StudentManager:
         except json.decoder.JSONDecodeError:
             self.student_list = []
         except FileNotFoundError:
-            with open('data.json', 'w', encoding='utf-8') as f:
+            with open('db/data.json', 'w', encoding='utf-8') as f:
                 self.student_list = []
 
     @staticmethod
