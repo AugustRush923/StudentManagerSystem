@@ -60,19 +60,19 @@ class StudentManager:
             print(f'{student.name}\t{student.gender}\t{student.tel}')
 
     def save_student_info(self):
-        with open('db/data.json', 'w', encoding='utf-8') as f:
+        with open('../db/data.json', 'w', encoding='utf-8') as f:
             json.dump(self.student_list, f, ensure_ascii=False, cls=StudentJSONEncoder, indent=4)
         print('保存成功')
         print('*' * 30)
 
     def load_student(self):
         try:
-            with open('db/data.json', 'r', encoding='utf-8') as f:
+            with open('../db/data.json', 'r', encoding='utf-8') as f:
                 self.student_list = json.load(f, cls=StudentJSONDecoder)
         except json.decoder.JSONDecodeError:
             self.student_list = []
         except FileNotFoundError:
-            with open('db/data.json', 'w', encoding='utf-8') as f:
+            with open('../db/data.json', 'w', encoding='utf-8') as f:
                 self.student_list = []
 
     @staticmethod
